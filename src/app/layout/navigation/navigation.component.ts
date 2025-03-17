@@ -11,7 +11,9 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-navigation',
+  templateUrl: './navigation.component.html',
+  styleUrl: './navigation.component.scss',
   imports: [
     RouterOutlet,
     MatToolbarModule,
@@ -20,12 +22,9 @@ import { map, shareReplay } from 'rxjs/operators';
     MatListModule,
     MatIconModule,
     AsyncPipe,
-  ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  ]
 })
-export class AppComponent {
-  title = 'desafio-angular';
+export class NavigationComponent {
   private breakpointObserver = inject(BreakpointObserver);
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

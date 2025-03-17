@@ -3,13 +3,9 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>
-      <mat-toolbar-row>Pets</mat-toolbar-row>
-      <mat-toolbar-row>
-        <button mat-flat-button>Cadastrar pet</button>
-      </mat-toolbar-row>
-    </mat-toolbar>
-    <mat-nav-list class="sidenav-list">
+    <mat-toolbar>Pets</mat-toolbar>
+    <mat-nav-list class="sidenav-list" fxLayout="column nowrap">
+      <button mat-flat-button>Cadastrar pet</button>
       <a mat-list-item href="/pets">Pets cadastrados</a>
       <a mat-list-item href="/agendamentos">Agendamentos</a>
       <a mat-list-item href="/notificacoes">Notificações</a>
@@ -32,5 +28,3 @@
     <router-outlet />
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-
