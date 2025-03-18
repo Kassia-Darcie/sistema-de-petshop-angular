@@ -1,24 +1,27 @@
 import { Routes } from '@angular/router';
-import { PetsComponent } from './pets/pets.component';
-import { AgendamentosComponent } from './agendamentos/agendamentos.component';
-import { NotificacoesComponent } from './notificacoes/notificacoes.component';
+import { PetsComponent } from './feature/pets/view/pets.component';
+import { AgendamentosComponent } from './feature/agendamentos/view/agendamentos.component';
+import { NotificacoesComponent } from './feature/notificacoes/view/notificacoes.component';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: 'pets',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'pets',
-    component: PetsComponent
+    component: PetsComponent,
+    title: 'Pets cadastrados'
   },
   {
     path: 'agendamentos',
-    component: AgendamentosComponent
+    component: AgendamentosComponent,
+    title: 'Agendamentos'
   },
   {
     path: 'notificacoes',
-    component: NotificacoesComponent
+    component: NotificacoesComponent,
+    title: 'Notificações'
   }
 ];
