@@ -2,9 +2,10 @@
 <div class="container">
   <div class="search-container">
     <mat-form-field>
-      <input matInput type="search" placeholder="Buscar pet">
+      <input #searchInput matInput type="search" placeholder="Buscar pet" [(ngModel)]="searchTerm" (ngModelChange)="searchPets(searchInput.value)">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </div>
-  <app-petList></app-petList>
+  
+  <app-petList [pets]="pets"></app-petList>
 </div>

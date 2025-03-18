@@ -6,10 +6,11 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class PetService {
+  private readonly baseUrl = "http://localhost:8080/api";
 
   constructor(private http: HttpClient) { }
 
-  getAllPets() {
-    return this.http.get<Pet[]>("http://localhost:8080/api/pets");
+  getAllPets(filtro: string) {
+    return this.http.get<Pet[]>(this.baseUrl + `/pets`);
   }
 }
