@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
+import { PetListComponent } from '../components/petList/petList.component';
 
 @Component({
   selector: 'app-pets',
-  imports: [MatInputModule, MatFormFieldModule, MatIconModule],
+  imports: [MatInputModule, MatFormFieldModule, MatIconModule, PetListComponent],
   templateUrl: './pets.component.html',
   styleUrl: './pets.component.scss'
 })

@@ -1,0 +1,12 @@
+mat-card {
+  background-color: rgb(255, 238, 193);
+
+  mat-card-content {
+    display: flex;
+    gap: 1rem;
+  }
+
+  mat-card-subtitle {
+    color: rgb(94, 94, 94);
+  }
+}
