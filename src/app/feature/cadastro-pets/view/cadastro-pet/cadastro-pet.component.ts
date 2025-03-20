@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-cadastro-pet',
   imports: [],
   templateUrl: './cadastro-pet.component.html',
-  styleUrl: './cadastro-pet.component.scss'
+  styleUrl: './cadastro-pet.component.css'
 })
 export class CadastroPetComponent {
 

@@ -8,7 +8,7 @@ import { PetCardComponent } from '../pet-card/pet-card.component';
   selector: 'app-petList',
   imports: [PetCardComponent],
   templateUrl: './petList.component.html',
-  styleUrl: './petList.component.scss'
+  styleUrl: './petList.component.css'
 })
 export class PetListComponent {
   @Input()

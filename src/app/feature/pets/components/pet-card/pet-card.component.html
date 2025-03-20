@@ -1,14 +1,14 @@
-<mat-card appearance="raised">
-  <mat-card-content>
+<div>
+  <div>
     <img mat-card-md-image src={{pet.imagem}} >
     <div>
-      <mat-card-title-group>
-        <mat-card-title>{{ pet.nome }}</mat-card-title>
-        <mat-card-subtitle>{{ pet.especie.toLowerCase() }} - {{ pet.raca}}</mat-card-subtitle>
+      <div>
+        <p>{{ pet.nome }}</p>
+        <p>{{ pet.especie.toLowerCase() }} - {{ pet.raca}}</p>
 
-      </mat-card-title-group>
+      </div>
       <p><strong>Tutor: </strong> {{ pet.tutor }}</p>
     </div>
 
-  </mat-card-content>
-</mat-card>
+  </div>
+</div>

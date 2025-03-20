@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   selector: 'app-notificacoes',
   imports: [],
   templateUrl: './notificacoes.component.html',
-  styleUrl: './notificacoes.component.scss'
+  styleUrl: './notificacoes.component.css'
 })
 export class NotificacoesComponent {
 

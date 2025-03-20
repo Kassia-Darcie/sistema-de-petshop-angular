@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   selector: 'app-agendamentos',
   imports: [],
   templateUrl: './agendamentos.component.html',
-  styleUrl: './agendamentos.component.scss'
+  styleUrl: './agendamentos.component.css'
 })
 export class AgendamentosComponent {
 

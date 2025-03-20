@@ -1,28 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { PetListComponent } from '../components/petList/petList.component';
-import { PetService } from '../../../services/petService/pet.service';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Pet } from '../model/pet';
-import { debounceTime, distinctUntilChanged, filter} from 'rxjs';
+import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
+
+import { PetService } from '../../../services/petService/pet.service';
+import { PetListComponent } from '../components/petList/petList.component';
+import { Pet } from '../model/pet';
 
 @Component({
     selector: 'app-pets',
     imports: [
-        MatInputModule,
-        MatFormFieldModule,
-        MatIconModule,
         PetListComponent,
-        FormsModule,
         ReactiveFormsModule,
         RouterOutlet
     ],
     providers: [PetService],
     templateUrl: './pets.component.html',
-    styleUrl: './pets.component.scss',
+    styleUrl: './pets.component.css',
 })
 export class PetsComponent {
     pets: Pet[] = [];
