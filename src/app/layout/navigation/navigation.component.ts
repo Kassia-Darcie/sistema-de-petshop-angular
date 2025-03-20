@@ -7,7 +7,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Title } from '@angular/platform-browser';
 
-import { ResponsiveServiceService } from '../../shared/services/responsiveService.service';
+import { ResponsiveServiceService } from '../../services/responsiveService.service';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -20,6 +21,8 @@ import { ResponsiveServiceService } from '../../shared/services/responsiveServic
     MatListModule,
     MatIconModule,
     AsyncPipe,
+    RouterLink,
+    RouterLinkActive
   ]
 })
 export class NavigationComponent {

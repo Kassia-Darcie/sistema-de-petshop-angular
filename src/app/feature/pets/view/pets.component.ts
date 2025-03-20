@@ -3,10 +3,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { PetListComponent } from '../components/petList/petList.component';
-import { PetService } from '../service/pet.service';
+import { PetService } from '../../../services/petService/pet.service';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Pet } from '../model/pet';
 import { debounceTime, distinctUntilChanged, filter} from 'rxjs';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-pets',
@@ -17,6 +18,7 @@ import { debounceTime, distinctUntilChanged, filter} from 'rxjs';
         PetListComponent,
         FormsModule,
         ReactiveFormsModule,
+        RouterOutlet
     ],
     providers: [PetService],
     templateUrl: './pets.component.html',

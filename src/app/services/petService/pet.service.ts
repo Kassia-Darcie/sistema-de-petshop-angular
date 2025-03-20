@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Pet } from '../model/pet';
+import { Pet } from '../../feature/pets/model/pet';
 import { Injectable } from '@angular/core';
 import { filter, map, switchMap, Observable } from 'rxjs';
 

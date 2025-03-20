@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { PetService} from '../../service/pet.service';
+import { PetService} from '../../../../services/petService/pet.service';
 import { Pet } from '../../model/pet';
 
 @Component({

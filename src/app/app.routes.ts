@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { PetsComponent } from './feature/pets/view/pets.component';
 import { AgendamentosComponent } from './feature/agendamentos/view/agendamentos.component';
 import { NotificacoesComponent } from './feature/notificacoes/view/notificacoes.component';
+import { CadastroPetComponent } from './feature/cadastro-pets/view/cadastro-pet/cadastro-pet.component';
 
 export const routes: Routes = [
   {
@@ -12,7 +13,12 @@ export const routes: Routes = [
   {
     path: 'pets',
     component: PetsComponent,
-    title: 'Pets cadastrados'
+    title: 'Pets cadastrados',
+  },
+  {
+    path: 'pets/cadastro',
+    component: CadastroPetComponent,
+    title: 'Cadastro de pets',
   },
   {
     path: 'agendamentos',

@@ -5,10 +5,10 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Pets</mat-toolbar>
     <mat-nav-list class="sidenav-list" fxLayout="column nowrap">
-      <button mat-flat-button>Cadastrar pet</button>
-      <a mat-list-item href="/pets">Pets cadastrados</a>
-      <a mat-list-item href="/agendamentos">Agendamentos</a>
-      <a mat-list-item href="/notificacoes">Notificações</a>
+      <a mat-flat-button routerLink="/pets/cadastro">Cadastrar pet</a>
+      <a mat-list-item routerLink="/pets" routerLinkActive="active">Pets cadastrados</a>
+      <a mat-list-item routerLink="/agendamentos" routerLinkActive="active">Agendamentos</a>
+      <a mat-list-item routerLink="/notificacoes" routerLinkActive="active">Notificações</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -23,6 +23,7 @@
         </button>
       }
       <span>{{pageTitle}}</span>
+
     </mat-toolbar>
 
     <ng-content #name></ng-content>
