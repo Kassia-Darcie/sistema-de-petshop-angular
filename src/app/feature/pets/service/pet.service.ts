@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Pet } from '../model/pet';
 import { Injectable } from '@angular/core';
+import { filter, map, switchMap, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class PetService {
 
   constructor(private http: HttpClient) { }
 
-  getAllPets(filtro: string) {
+  getAllPets(): Observable<Pet[]> {
     return this.http.get<Pet[]>(this.baseUrl + `/pets`);
   }
 }
