@@ -1,9 +1,16 @@
 
 <div class="container">
-  <div class="search-container">
-    <div>
-      <input type="search" placeholder="Buscar pet" [formControl]="searchControl">
-    </div>
+  <div class="search-container px-8 flex justify-between">
+    <!-- input de busca -->
+    <p-iconfield styleClass="w-4/12">
+        <input styleClass="w-full" type="text" pInputText placeholder="Search" fluid/>
+        <p-inputicon styleClass="pi pi-search" />
+    </p-iconfield>
+
+    <!-- botão de adicionar -->
+    <a routerLink="/pets/cadastro" class="p-button font-bold">
+        Cadastrar pet
+    </a>
   </div>
   <router-outlet/>
   <app-petList [pets]="pets"></app-petList>

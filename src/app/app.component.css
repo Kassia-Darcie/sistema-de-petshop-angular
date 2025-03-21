@@ -1,5 +1,19 @@
-.container {
-  background-color: aqua;
-  width: 80vw;
-  margin: 0 auto;
+@import '../styles.css';
+
+@layer components {
+    .header-menu {
+        a {
+            color: var(--color-sky-50);
+            font-size: var(--text-xl);
+            font-weight: var(--font-bold);
+            margin-right: 1rem;
+            transition: ease-in 0.3s;
+            cursor: pointer;
+
+            &:hover {
+                color: var(--color-sky-600);
+            }
+        }
+    }
+
 }

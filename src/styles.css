@@ -1,7 +1,16 @@
-@import 'tailwind.css';
+@import "tailwindcss";
+@import "tailwindcss-primeui";
+@import "primeicons/primeicons.css";
 
 html, body { height: 100%; }
 body { margin: 0;  }
+
+@layer base {
+    h1 {
+        font-size: var(--text-2xl);
+        font-weight: var(--font-bold);
+    }
+}
 
 .container {
   width: 90%;

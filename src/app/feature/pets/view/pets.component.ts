@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { debounceTime, distinctUntilChanged, filter } from 'rxjs';
-
+import { InputIcon } from 'primeng/inputicon';
+import { IconField } from 'primeng/iconfield';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { Fluid, FluidClasses, FluidModule } from 'primeng/fluid';
 import { PetService } from '../../../services/petService/pet.service';
 import { PetListComponent } from '../components/petList/petList.component';
 import { Pet } from '../model/pet';
@@ -10,9 +14,14 @@ import { Pet } from '../model/pet';
 @Component({
     selector: 'app-pets',
     imports: [
+        InputIcon,
+        IconField,
+        InputTextModule,
         PetListComponent,
         ReactiveFormsModule,
-        RouterOutlet
+        RouterOutlet,
+        RouterLink,
+        Fluid
     ],
     providers: [PetService],
     templateUrl: './pets.component.html',
