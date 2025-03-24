@@ -1,11 +1,115 @@
-import { Component } from '@angular/core';
+import { Pet } from './../../../../models/pet';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import {ReactiveFormsModule, FormControl, FormGroup, Validators } from '@angular/forms';
+import { PetService } from '@services/petService/pet.service';
+
+import { CardModule } from 'primeng/card';
+import { InputTextModule } from 'primeng/inputtext';
+import { SelectModule, SelectChangeEvent } from 'primeng/select';
+import { AutoCompleteModule, AutoCompleteCompleteEvent } from 'primeng/autocomplete';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { ButtonModule } from 'primeng/button';
+import { IftaLabelModule } from 'primeng/iftalabel';
+import { TextareaModule } from 'primeng/textarea';
+
+const P_COMPONENTS = [CardModule, InputTextModule, SelectModule, AutoCompleteModule, InputNumberModule, ButtonModule, IftaLabelModule, TextareaModule];
 
 @Component({
   selector: 'app-cadastro-pet',
-  imports: [],
+  imports: [...P_COMPONENTS, ReactiveFormsModule],
+  providers: [PetService],
   templateUrl: './cadastro-pet.component.html',
   styleUrl: './cadastro-pet.component.css'
 })
-export class CadastroPetComponent {
+export class CadastroPetComponent implements OnInit{
+    petsForm = new FormGroup({
+        nome: new FormControl('', [
+            Validators.required,
+            Validators.minLength(2),
+        ]),
+        especie: new FormControl('', [
+            Validators.required
+        ]),
+        raca: new FormControl('', [
+            Validators.required
+        ]),
+        idade: new FormControl('', [
+            Validators.required
+        ]),
+        peso: new FormControl('', [
+            Validators.required
+        ]),
+        tutor: new FormControl('', [
+            Validators.required
+        ]),
+        emailTutor: new FormControl('', [
+            Validators.required
+        ]),
+        descricao: new FormControl('', [
+            Validators.required
+        ]),
+        cor: new FormControl('', [
+            Validators.required
+        ]),
+    });
+
+    especies = ['Cachorro', 'Gato'];
+    racas: WritableSignal<string[]> = signal([]);
+    racasGato: string[] = [];
+    filteredItems: string[] = [];
+
+    constructor(private petService: PetService) {
+        this.petService = petService;
+    }
+
+    ngOnInit(): void {
+
+
+    }
+
+    filterItems(event: AutoCompleteCompleteEvent) {
+        //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+        let filtered: string[] = [];
+        let query = event.query;
+
+        for (let i = 0; i < (this.racas() as any[]).length; i++) {
+            let item = (this.racas() as string[])[i];
+            if (item.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                filtered.push(item);
+            }
+        }
+
+        this.filteredItems = filtered;
+    }
+
+    onEspecieSelect(event: SelectChangeEvent): void {
+        const especie: string = event.value;
+        this.petsForm.value.especie = especie;
+        if (especie === 'Cachorro') {
+            this.petService.getPetBreeds('Cachorro').then(res => {
+                this.racas.set(res);
+                this.filteredItems = res;
+            });
+        } else {
+            this.petService.getPetBreeds('Gato').then(res => {
+                this.racas.set(res);
+                this.filteredItems = res;
+            });
+        }
+
+    }
+
+    handleSubmit(): void {
+        const pet: Partial<Pet> = {
+            ...this.petsForm.value as Partial<Pet>,
+        };
+        this.petService.savePet(pet).subscribe({
+            next: (res) => {
+                console.log(res);
+            }
+        });
+    }
+
+
 
 }

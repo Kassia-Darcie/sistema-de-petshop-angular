@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Pet } from '../../model/pet';
+import { Pet } from '../../../../models/pet';
 
 @Component({
   selector: 'app-pet-card',

@@ -1,5 +1,5 @@
 export interface Pet {
-  id: string,
+  id?: string,
   nome: string,
   especie: string,
   tutor: string,
@@ -9,5 +9,5 @@ export interface Pet {
   peso: number,
   cor: string,
   descricao: string,
-  imagem: string
+  imagem?: string
 }

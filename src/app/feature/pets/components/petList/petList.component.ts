@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Pet } from '../../model/pet';
+import { Pet } from '../../../../models/pet';
 import { PetCardComponent } from '../pet-card/pet-card.component';
 
 
