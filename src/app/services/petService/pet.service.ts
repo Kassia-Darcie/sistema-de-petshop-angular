@@ -19,6 +19,11 @@ export class PetService {
     return this.http.post<string>(this.baseUrl + `/pets`, pet);
   }
 
+  deletePet(id: string) {
+    return this.http.delete(this.baseUrl + `/pets/${
+        id}`);
+    }
+
   async getPetBreeds(specie: 'Cachorro' | 'Gato'): Promise<string[]> {
     let breedsNames: string[] = [];
     let res, data;

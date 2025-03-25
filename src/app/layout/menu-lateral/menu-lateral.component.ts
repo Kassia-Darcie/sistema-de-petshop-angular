@@ -9,7 +9,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-menu-lateral',
-  imports: [DrawerModule, ButtonModule, Ripple, AvatarModule, StyleClass, RouterLink, RouterLinkActive],
+  imports: [DrawerModule, ButtonModule, AvatarModule, RouterLink, RouterLinkActive],
   templateUrl: './menu-lateral.component.html',
   styleUrl: './menu-lateral.component.css'
 })
