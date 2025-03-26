@@ -11,6 +11,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ButtonModule } from 'primeng/button';
 import { IftaLabelModule } from 'primeng/iftalabel';
 import { TextareaModule } from 'primeng/textarea';
+import { Router } from '@angular/router';
 
 const P_COMPONENTS = [CardModule, InputTextModule, SelectModule, AutoCompleteModule, InputNumberModule, ButtonModule, IftaLabelModule, TextareaModule];
 
@@ -58,8 +59,10 @@ export class CadastroPetComponent implements OnInit{
     racasGato: string[] = [];
     filteredItems: string[] = [];
 
-    constructor(private petService: PetService) {
-        this.petService = petService;
+    constructor(
+        private petService: PetService,
+        private router: Router
+    ) {
     }
 
     ngOnInit(): void {
@@ -68,7 +71,6 @@ export class CadastroPetComponent implements OnInit{
     }
 
     filterItems(event: AutoCompleteCompleteEvent) {
-        //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
         let filtered: string[] = [];
         let query = event.query;
 
@@ -108,6 +110,8 @@ export class CadastroPetComponent implements OnInit{
                 console.log(res);
             }
         });
+        this.petService.addPetToList(pet as Pet);
+        this.router.navigateByUrl('/pets');
     }
 
 

@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, SimpleChanges } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { IconField } from 'primeng/iconfield';
 import { InputIcon } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
@@ -29,19 +29,24 @@ export class PetsComponent {
     pets: Pet[] = [];
     allPets: Pet[] = [];
     searchControl = new FormControl('');
-    petService: PetService = inject(PetService);
+
+    constructor(private router: Router, private petService: PetService) {}
 
     ngOnInit(): void {
-        this.petService.getAllPets().subscribe((res) => {
-            this.pets = res;
-            this.allPets = res;
+        this.petService.pets$.subscribe((pets) => {
+            this.pets = pets;
+            this.allPets = pets;
         });
+
+        this.loadPets();
 
         this.searchControl.valueChanges
             .pipe(
                 debounceTime(300),
                 distinctUntilChanged(),
-                filter((nomePet) => nomePet!.length > 2 || nomePet!.length === 0)
+                filter(
+                    (nomePet) => nomePet!.length > 2 || nomePet!.length === 0
+                )
             )
             .subscribe((nomePet) => {
                 if (!nomePet || nomePet.trim() === '') {
@@ -52,6 +57,19 @@ export class PetsComponent {
                     );
                 }
             });
+    }
 
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['pets'] && changes['pets'].currentValue) {
+            this.loadPets();
+            console.log('Pets changed com:', changes['pets'].currentValue);
+        }
+    }
+
+    loadPets(): void {
+        this.petService.getAllPets().subscribe((pets) => {
+            this.pets = pets;
+            this.allPets = pets;
+        });
     }
 }

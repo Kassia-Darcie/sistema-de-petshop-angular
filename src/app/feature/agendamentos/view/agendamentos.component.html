@@ -1,3 +1,18 @@
 <div class="container">
-  <p>agendamentos works!</p>
+    @for (agendamento of agendamentos; track $index) {
+        <div class="card">
+            <div class="card-header">
+                <h2>{{ agendamento.pet.petName }}</h2>
+            </div>
+            <div class="card-body">
+                <p>{{ agendamento.data }}</p>
+                <p>{{ agendamento.status }}</p>
+                <p>{{ agendamento.tipo }}</p>
+            </div>
+            <div class="card-footer">
+                <!-- <a routerLink="/agendamentos/{{ agendamento.id }}" class="p-button">Editar</a>
+                <button class="p-button" (click)="deleteAgendamento(agendamento.id)">Excluir</button> -->
+            </div>
+        </div>
+    }
 </div>
