@@ -3,6 +3,11 @@ import { Pet } from '../../models/pet';
 import { Injectable } from '@angular/core';
 import { Observable, switchMap, map } from 'rxjs';
 
+interface PetFilter {
+    nome: string;
+    raca: string;
+    especie: string;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -15,8 +20,17 @@ export class PetService {
     return this.http.get<Pet[]>(this.baseUrl + `/pets`);
   }
 
+  getPetById(id: string): Observable<Pet> {
+    return this.http.get<Pet>(this.baseUrl + `/pets/${
+        id}`);
+  }
+
   savePet(pet: Partial<Pet>) {
     return this.http.post<string>(this.baseUrl + `/pets`, pet);
+  }
+
+  updatePet(pet: Pet) {
+    return this.http.put(this.baseUrl + `/pets/${pet.id}`, pet);
   }
 
   deletePet(id: string) {

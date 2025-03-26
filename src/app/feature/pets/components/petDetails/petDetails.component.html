@@ -1,0 +1,69 @@
+<div>
+    <p-confirmdialog/>
+    <app-pet-edit-form [pet]="pet" (petUpdated)="handlePetUpdated($event)"/>
+    <div class="grid grid-cols-12 gap-y-8 gap-x-4">
+        <!-- Imagem -->
+        <div class="col-span-6 rounded-2xl overflow-hidden">
+            <img
+                class="w-full h-full object-cover"
+                src="{{ pet.imagem }}"
+                alt="Foto de {{ pet.nome }}"
+            />
+        </div>
+        <!-- Informações -->
+        <div class="col-span-6 flex flex-col py-8">
+            <span class="text-sm text-surface-500 capitalize">{{
+                pet.especie.toLowerCase()
+            }}</span>
+            <h1 class="text-5xl">{{ pet.nome }}</h1>
+
+            <div class="mt-6 px-4">
+                <p class="text-base capitalize indent-2">
+                    <span class="font-bold mr-3">Raça:</span>
+                    <span class="text-sm">{{ pet.raca }}</span>
+                </p>
+                <p class="text-base capitalize indent-2">
+                    <span class="font-bold mr-3">Idade:</span>
+                    <span class="text-sm">{{ pet.idade }}</span>
+                </p>
+                <p class="text-base capitalize indent-2">
+                    <span class="font-bold mr-3">Peso:</span>
+                    <span class="text-sm">{{ pet.peso }} kgs</span>
+                </p>
+                <p class="text-base capitalize indent-2">
+                    <span class="font-bold mr-3">Cor:</span>
+                    <span class="text-sm">{{ pet.cor }}</span>
+                </p>
+                <p class="text-base capitalize indent-2">
+                    <span class="font-bold mr-3">Tutor:</span>
+                    <span class="text-sm">{{ pet.tutor }}</span>
+                </p>
+                <p class="text-base capitalize indent-2">
+                    <span class="font-bold mr-3">Email:</span>
+                    <span class="text-sm">{{ pet.emailTutor }}</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Descrição -->
+        <div class="col-start-2 col-span-11">
+            <h2 class="text-2xl mb-2">Descrição</h2>
+            <p class="text-base">{{ pet.descricao }}</p>
+        </div>
+
+        <!-- Agendamentos -->
+
+        <!-- Botões -->
+        <div class="col-span-12 flex justify-end gap-2">
+            <a class="" [routerLink]="'/pets'">
+                <p-button label="Voltar" variant="outlined" [raised]="true" />
+            </a>
+
+            <p-button label="Excluir" severity="danger" [raised]="true" (onClick)="confirmEvent($event, pet.id!)"/>
+
+
+                <p-button label="Editar" [raised]="true" (onClick)="editPet(pet)"/>
+
+        </div>
+    </div>
+</div>

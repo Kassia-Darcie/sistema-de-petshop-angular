@@ -1,17 +1,23 @@
+<div class="container flex flex-col items-center gap-20">
+    <div class="search-container px-8 flex justify-between w-full">
+        <!-- input de busca -->
+        <p-iconfield styleClass="w-4/12">
+            <input
+                styleClass="w-full"
+                type="text"
+                pInputText
+                placeholder="Search"
+                fluid
+            />
+            <p-inputicon styleClass="pi pi-search" />
+        </p-iconfield>
 
-<div class="container">
-  <div class="search-container px-8 flex justify-between">
-    <!-- input de busca -->
-    <p-iconfield styleClass="w-4/12">
-        <input styleClass="w-full" type="text" pInputText placeholder="Search" fluid/>
-        <p-inputicon styleClass="pi pi-search" />
-    </p-iconfield>
-
-    <!-- botão de adicionar -->
-    <a routerLink="/pets/cadastro" class="p-button font-bold">
-        Cadastrar pet
-    </a>
-  </div>
-  <router-outlet/>
-  <app-petList [pets]="pets"></app-petList>
+        <!-- botão de adicionar -->
+        <a routerLink="/pets/cadastro" class="p-button font-bold">
+            Cadastrar pet
+        </a>
+    </div>
+    <div class="w-[80%]">
+        <router-outlet />
+    </div>
 </div>

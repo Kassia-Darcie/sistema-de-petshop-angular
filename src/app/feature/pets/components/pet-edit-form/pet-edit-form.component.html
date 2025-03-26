@@ -1,0 +1,45 @@
+<p-dialog header="Editar Pet" [(visible)]="visible" [style]="{width: '60vw'}" [modal]="true">
+    <form [formGroup]="editForm" class="w-full mt-4 p-5">
+        <p-fluid>
+            <h2 class="font-bold mb-4">Informações do pet</h2>
+            <div class="grid grid-cols-3 gap-x-2 gap-y-4 mb-8">
+                <p-iftalabel class="col-span-2">
+                    <input id="nome" type="text" pInputText formControlName="nome"/>
+                    <label for="nome">Nome</label>
+                </p-iftalabel>
+                <p-iftalabel class="col-span-1">
+                    <input id="raca" type="text" pInputText formControlName="raca"/>
+                    <label for="raca">Raça</label>
+                </p-iftalabel>
+                <p-iftalabel>
+                    <input id="idade" type="text" pInputText formControlName="idade"/>
+                    <label for="idade">Idade</label>
+                </p-iftalabel>
+                <p-iftalabel>
+                    <p-inputnumber id="peso" mode="decimal" [maxFractionDigits]="1" [maxFractionDigits]="2" formControlName="peso"/>
+                    <label for="peso">Peso</label>
+                </p-iftalabel>
+                <p-iftalabel>
+                    <input id="cor" type="text" pInputText formControlName="cor"/>
+                    <label for="cor">Cor</label>
+                </p-iftalabel>
+            </div>
+
+            <h2 class="font-bold mb-4">Informações do tutor</h2>
+            <div class="grid grid-cols-2 gap-x-2 gap-y-4 mb-8">
+                <p-iftalabel>
+                    <input id="tutor" type="text" pInputText formControlName="tutor"/>
+                    <label for="tutor">Tutor</label>
+                </p-iftalabel>
+                <p-iftalabel>
+                    <input id="emailTutor" type="text" pInputText formControlName="emailTutor"/>
+                    <label for="emailTutor">Email do tutor</label>
+                </p-iftalabel>
+            </div>
+
+            <div class="flex justify-end gap-4">
+                <p-button label="Save" icon="pi pi-check" iconPos="right" (onClick)="saveChanges()"/>
+            </div>
+        </p-fluid>
+    </form>
+</p-dialog>

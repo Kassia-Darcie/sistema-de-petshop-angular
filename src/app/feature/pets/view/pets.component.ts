@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { IconField } from 'primeng/iconfield';
@@ -29,10 +29,7 @@ export class PetsComponent {
     pets: Pet[] = [];
     allPets: Pet[] = [];
     searchControl = new FormControl('');
-
-    constructor(private petService: PetService) {
-        this.petService = petService;
-    }
+    petService: PetService = inject(PetService);
 
     ngOnInit(): void {
         this.petService.getAllPets().subscribe((res) => {
