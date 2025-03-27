@@ -1,32 +1,31 @@
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { Component, inject, Input, OnDestroy, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { PetService } from '@services/petService/pet.service';
-import {
-    Component,
-    inject,
-    Input,
-    NgModule,
-    OnDestroy,
-    OnInit,
-    Signal,
-} from '@angular/core';
 import { ButtonModule } from 'primeng/button';
-
-import { Pet } from '../../../../models/pet';
+import { TableModule } from 'primeng/table';
 import { DataViewModule } from 'primeng/dataview';
-import { PetCardComponent } from '../pet-card/pet-card.component';
-import { ROUTER_OUTLET_DATA, RouterLink } from '@angular/router';
-import { Subject } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+
+import { Pet } from '@models/pet';
+import { CardModule } from 'primeng/card';
+import { TagModule } from 'primeng/tag';
+import { SelectModule } from 'primeng/select';
+import { FormControl, FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'app-petList',
-    imports: [PetCardComponent, DataViewModule, ButtonModule, RouterLink],
-    providers: [PetService],
+    imports: [DataViewModule, ButtonModule, RouterLink, AsyncPipe, CommonModule, TableModule, CardModule, TagModule, SelectModule, FormsModule],
+    providers: [PetService, AsyncPipe],
     templateUrl: './petList.component.html',
     styleUrls: ['../../../../../styles.css', './petList.component.css'],
 })
 export class PetListComponent implements OnInit, OnDestroy {
-    pets: Pet[] = [];
+    pets$!: Observable<Pet[]>;
+    especies = [{nome: 'Cachorro'}, {nome: 'Gato'}];
     petService = inject(PetService);
+    selectedEspecie = '';
     private destroy$ = new Subject<void>();
 
     ngOnInit(): void {
@@ -40,21 +39,16 @@ export class PetListComponent implements OnInit, OnDestroy {
     }
 
     showDetails(id: string) {
-        console.log('Show details of pet with id:', id);
     }
 
     private updateList() {
         this.petService.pets$.pipe(
-            takeUntil(this.destroy$),
-            startWith(null)
-        ).subscribe(
-            () => this.loadPets()
-        );
+            takeUntil(this.destroy$)
+        ).subscribe();
     }
 
     private loadPets() {
-        this.petService.getAllPets().subscribe(
-            (pets) => this.pets = pets
-        );
+       this.pets$ = this.petService.pets$;
+       this.petService.getAllPets().subscribe();
     }
 }

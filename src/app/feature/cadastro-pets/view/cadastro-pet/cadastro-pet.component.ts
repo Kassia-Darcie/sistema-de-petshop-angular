@@ -105,13 +105,9 @@ export class CadastroPetComponent implements OnInit{
         const pet: Partial<Pet> = {
             ...this.petsForm.value as Partial<Pet>,
         };
-        this.petService.savePet(pet).subscribe({
-            next: (res) => {
-                console.log(res);
-            }
-        });
-        this.petService.addPetToList(pet as Pet);
-        this.router.navigateByUrl('/pets');
+        this.petService.savePet(pet).subscribe();
+
+        this.router.navigate(['/pets'],{replaceUrl: true});
     }
 
 

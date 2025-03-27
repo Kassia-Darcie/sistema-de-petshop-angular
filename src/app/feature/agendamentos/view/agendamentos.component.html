@@ -1,18 +1,50 @@
 <div class="container">
-    @for (agendamento of agendamentos; track $index) {
-        <div class="card">
-            <div class="card-header">
-                <h2>{{ agendamento.pet.petName }}</h2>
+    <p-table [value]="agendamentos" [tableStyle]="{ 'min-width': '60rem' }">
+        <ng-template #caption>
+            <div class="flex items-center justify-between">
+                <span class="text-xl font-bold">Products</span>
+                <p-button icon="pi pi-refresh" rounded raised />
             </div>
-            <div class="card-body">
-                <p>{{ agendamento.data }}</p>
-                <p>{{ agendamento.status }}</p>
-                <p>{{ agendamento.tipo }}</p>
-            </div>
-            <div class="card-footer">
-                <!-- <a routerLink="/agendamentos/{{ agendamento.id }}" class="p-button">Editar</a>
-                <button class="p-button" (click)="deleteAgendamento(agendamento.id)">Excluir</button> -->
-            </div>
-        </div>
-    }
+        </ng-template>
+        <ng-template #header>
+            <tr>
+                <th>Tipo</th>
+                <th>Pet</th>
+                <th>Data</th>
+                <th>Cuidados</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template #body let-agendamento>
+            <tr>
+                <td>{{ agendamento.tipo }}</td>
+                <td>
+                    {{ agendamento.pet.petName }}
+                </td>
+                <td>{{ agendamento.data }}</td>
+                <td>{{ agendamento.cuidados }}</td>
+                <td>
+                    <p-tag
+                        [value]="agendamento.status"
+                        [severity]="getSeverity(agendamento.status)"
+                    />
+                </td>
+                <td>
+                    <a [routerLink]="`/agendamentos/${agendamento.id}/reagendar`"
+                        ><button
+                            class="p-3 bg-blue-500 hover:bg-blue-300 text-white rounded-full cursor-pointer"
+                            (click)="reagendar()"
+                        >
+                            reagendar
+                        </button></a
+                    >
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template #footer>
+            In total there are
+            {{ agendamentos ? agendamentos.length : 0 }} agendamentos.
+        </ng-template>
+    </p-table>
 </div>

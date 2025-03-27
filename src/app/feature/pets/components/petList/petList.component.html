@@ -1,38 +1,94 @@
-<div class="flex flex-col mx-auto mt-16 overflow-hidden rounded-3xl">
-  <p-dataview #dv [value]="pets" [layout]="'list'">
-    <ng-template #list let-pets: Pet[] >
-        <div class="grid grid-cols-12 gap-4 grid-nogutter p-8 ">
-            @for (pet of pets; track pet.id) {
-                <div class="col-span-12 border-b p-4 pt-4 pb-8 border-gray-200">
-                    <div class="flex flex-row items-center gap-4 ">
-                        <img [src]="pet.imagem" [alt]="pet.nome" class="w-24 h-24 rounded">
+<div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+    <div
+        class="flex flex-col md:flex-row md:items-center md:justify-between gap-4"
+    >
+        <h2 class="text-2xl font-bold text-gray-800">Lista de Pets</h2>
 
-                        <div class="flex">
-                            <div class="flex flex-row md:flex-col justify-between items-start gap-2">
-                                <div>
-                                    <span class="font-medium text-secondary text-sm">{{ pet.raca }}</span>
-                                    <div class="text-xl font-medium mt-2">{{ pet.nome }}</div>
-                                    <span class="text-sm">de {{
-                                        pet.tutor
-                                    }}</span>
-                                </div>
+        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+            <span class="p-input-icon-left w-full">
+                <i class="pi pi-search"></i>
+                <input pInputText placeholder="Buscar..." class="w-full" />
+            </span>
 
-                                <div class="flex flex-row gap-2">
-                                    
-                                    <a class="p-button p-button-text"
-                                        [routerLink]="['/pets', pet.id]"
-                                        (click)="showDetails(pet.id!)"
-                                    >Exibir detalhes</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
+            <p-select
+                [(ngModel)]="selectedEspecie"
+                [options]="especies"
+                placeholder="Todas espécies"
+                optionLabel="nome"
+                class="w-full sm:w-auto"
+            />
+
+            <button
+                pButton
+                pRipple
+                icon="pi pi-plus"
+                label="Novo Pet"
+                routerLink="/pets/cadastro"
+                class="w-full sm:w-auto"
+            ></button>
+        </div>
+    </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (pet of (pets$ | async); track pet.id) {
+    <p-card class="hover:shadow-lg transition-shadow duration-300">
+        <ng-template pTemplate="header">
+            <img
+                [src]="pet.imagem || 'assets/default-pet.jpg'"
+                [alt]="pet.nome"
+                class="w-full h-48 object-cover"
+            />
+        </ng-template>
+
+        <div class="flex justify-between items-start mb-2">
+            <h3 class="text-xl font-bold">{{ pet.nome }}</h3>
+            <p-tag
+                [value]="pet.especie"
+                [severity]="pet.especie === 'CACHORRO' ? 'info' : 'warn'"
+            ></p-tag>
         </div>
 
-    </ng-template>
+        <p class="text-gray-600 mb-1">
+            <i class="pi pi-tag mr-2"></i>{{ pet.raca }}
+        </p>
+        <p class="text-gray-600">
+            <i class="pi pi-user mr-2"></i>{{ pet.tutor }}
+        </p>
 
-
-  </p-dataview>
+        <ng-template pTemplate="footer">
+            <div class="flex justify-between items-center">
+                <!-- <small class="text-gray-400">Cadastrado em {{ pet.dataCadastro | date }}</small> -->
+                <button
+                    pButton
+                    pRipple
+                    icon="pi pi-ellipsis-h"
+                    [routerLink]="['/pets', pet.id]"
+                    class="p-button-sm p-button-text"
+                ></button>
+            </div>
+        </ng-template>
+    </p-card>
+    } @empty {
+    <div class="col-span-full">
+        <p-card>
+            <div class="text-center py-12">
+                <i class="pi pi-search text-4xl text-gray-400 mb-4"></i>
+                <h4 class="text-xl font-medium text-gray-600 mb-2">
+                    Nenhum pet encontrado
+                </h4>
+                <p class="text-gray-500 mb-4">
+                    Tente ajustar seus filtros de busca ou cadastre um novo pet
+                </p>
+                <button
+                    pButton
+                    pRipple
+                    icon="pi pi-plus"
+                    label="Cadastrar Pet"
+                    routerLink="/pets/cadastro"
+                ></button>
+            </div>
+        </p-card>
+    </div>
+    }
 </div>

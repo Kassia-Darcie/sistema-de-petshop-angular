@@ -5,6 +5,7 @@ import { NotificacoesComponent } from './feature/notificacoes/view/notificacoes.
 import { CadastroPetComponent } from './feature/cadastro-pets/view/cadastro-pet/cadastro-pet.component';
 import { PetDetailsComponent } from './feature/pets/components/petDetails/petDetails.component';
 import { PetListComponent } from './feature/pets/components/petList/petList.component';
+import { ReagendamentoComponent } from './feature/agendamentos/reagendamento/reagendamento.component';
 
 export const routes: Routes = [
   {
@@ -14,28 +15,27 @@ export const routes: Routes = [
   },
   {
     path: 'pets',
-    component: PetsComponent,
+    component: PetListComponent,
     title: 'Pets cadastrados',
-    children: [
-        {
-            path: '',
-            component: PetListComponent
-        },
-        {
-            path: 'cadastro',
-            component: CadastroPetComponent,
-            title: 'Cadastro de pets',
-        },
-        {
-            path: ':petId',
-            component: PetDetailsComponent
-        },
-    ]
+  },
+  {
+    path: 'pets/cadastro',
+    component: CadastroPetComponent,
+    title: 'Cadastro de pets',
+  },
+  {
+    path: 'pets/:petId',
+    component: PetDetailsComponent
   },
   {
     path: 'agendamentos',
     component: AgendamentosComponent,
     title: 'Agendamentos'
+  },
+  {
+    path: 'agendamentos/:id/reagendar',
+    component: ReagendamentoComponent,
+    title: 'Agendamentos | Reagendar'
   },
   {
     path: 'notificacoes',

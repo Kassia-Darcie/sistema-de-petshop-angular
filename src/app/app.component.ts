@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MenuLateralComponent } from './layout/menu-lateral/menu-lateral.component';
+import { MenuComponent } from "./layout/menu/menu.component";
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,9 @@ import { MenuLateralComponent } from './layout/menu-lateral/menu-lateral.compone
     RouterOutlet,
     RouterLink,
     RouterLinkActive,
-    MenuLateralComponent
-  ],
+    MenuLateralComponent,
+    MenuComponent
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

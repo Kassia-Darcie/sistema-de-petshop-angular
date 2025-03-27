@@ -29,13 +29,11 @@ export class PetDetailsComponent implements OnInit {
     set petId(petId: string) {
         this.petService.getPetById(petId).subscribe((pet) => {
             this.pet = pet;
-            // Não é necessário definir pet diretamente no formulário
-            // já que está sendo passado pela propriedade [pet] no template
-            console.log('Pet loaded:', pet);
         });
     }
 
     ngOnInit() {
+
     }
 
     confirmEvent(event: Event, id: string) {
@@ -63,7 +61,7 @@ export class PetDetailsComponent implements OnInit {
                     summary: 'Pet excluído',
                     detail: 'O pet foi excluído com sucesso',
                 });
-                this.router.navigateByUrl('/pets');
+                this.router.navigate(['/pets'],{replaceUrl: true});
             },
             reject: () => {
 

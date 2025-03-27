@@ -22,13 +22,11 @@ export class AgendamentoService {
     }
 
     getAllAgendamentos(): Observable<Agendamento[]> {
-        return this.http.get<Agendamento[]>(this.baseUrl).pipe(
-            tap((agendamentos) => this.updateAgendamentosList(agendamentos))
-        );
+        return this.http.get<Agendamento[]>(this.baseUrl);
     }
 
     getAgendamentoById(id: string): Observable<Agendamento> {
-        return this.http.get<Agendamento>(this.baseUrl + id);
+        return this.http.get<Agendamento>(`${this.baseUrl}/${id}`);
     }
 
     saveAgendamento(agendamento: Partial<Agendamento>): Observable<string> {
@@ -39,6 +37,14 @@ export class AgendamentoService {
 
     updateAgendamento(agendamento: Agendamento) {
         return this.http.put(this.baseUrl + agendamento.id, agendamento);
+    }
+
+    reagendarAgendamento(id: number, data: string) {
+        return this.http.patch(`${this.baseUrl}/${id}`, null, {
+            params: {
+                novoHorario: data
+            }
+        }).pipe(tap(() => this.notificarAtualizacoes()));
     }
 
     deleteAgendamento(id: string) {

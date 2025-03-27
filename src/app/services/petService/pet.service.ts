@@ -29,7 +29,9 @@ export class PetService {
 
     getAllPets(): Observable<Pet[]> {
         return this.http.get<Pet[]>(this.baseUrl + `/pets`).pipe(
-            tap((pets) => this.updatePetsList(pets))
+            tap((pets) => {
+                this.petsSubject.next(pets);
+            })
         );
     }
 
@@ -38,13 +40,19 @@ export class PetService {
     }
 
     savePet(pet: Partial<Pet>): Observable<string> {
-        return this.http
-            .post<string>(this.baseUrl + `/pets`, pet)
-            .pipe(tap((res) => this.notificarAtualizacoes()));
+        return this.http.post<string>(this.baseUrl + `/pets`, pet).pipe(
+            tap((res) => {
+                this.notificarAtualizacoes();
+            })
+        );
     }
 
     updatePet(pet: Pet) {
-        return this.http.put(this.baseUrl + `/pets/${pet.id}`, pet);
+        return this.http.put(this.baseUrl + `/pets/${pet.id}`, pet).pipe(
+            tap((res) => {
+                this.notificarAtualizacoes();
+            })
+        );
     }
 
     deletePet(id: string) {
