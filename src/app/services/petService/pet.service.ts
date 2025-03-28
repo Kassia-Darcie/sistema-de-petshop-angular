@@ -1,13 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, Observable, Subject, tap, throwError } from 'rxjs';
 
 import { Pet } from '../../models/pet';
 
 interface PetFilter {
-    nome: string;
-    raca: string;
-    especie: string;
+    nome?: string;
+    raca?: string;
+    especie?: string;
 }
 @Injectable({
     providedIn: 'root',
@@ -27,8 +27,10 @@ export class PetService {
         this.petsSubject.next([...this.petsSubject.value, pet]);
     }
 
-    getAllPets(): Observable<Pet[]> {
-        return this.http.get<Pet[]>(this.baseUrl + `/pets`).pipe(
+    getAllPets(filters?: PetFilter): Observable<Pet[]> {
+        return this.http.get<Pet[]>(this.baseUrl + `/pets`, {
+            params: filters as HttpParams,
+        }).pipe(
             tap((pets) => {
                 this.petsSubject.next(pets);
             }),

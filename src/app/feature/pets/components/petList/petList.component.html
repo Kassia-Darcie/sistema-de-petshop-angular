@@ -7,7 +7,7 @@
         <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
             <span class="p-input-icon-left w-full">
                 <i class="pi pi-search"></i>
-                <input pInputText placeholder="Buscar..." class="w-full" />
+                <input pInputText placeholder="Buscar..." class="w-full" [formControl]="inputDeBusca"/>
             </span>
 
             <p-select
@@ -15,6 +15,7 @@
                 [options]="especies"
                 placeholder="Todas espécies"
                 optionLabel="nome"
+                (onChange)="filtrarPorEspecie($event)"
                 class="w-full sm:w-auto"
             />
 
