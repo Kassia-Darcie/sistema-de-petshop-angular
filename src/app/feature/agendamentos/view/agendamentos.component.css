@@ -1,0 +1,18 @@
+/* agendamentos.component.css */
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+    background-color: #f8fafc;
+    color: #64748b;
+}
+
+:host ::ng-deep .p-paginator {
+    background-color: transparent;
+    border: none;
+    margin-top: 1rem;
+}
+
+.custom-badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+}

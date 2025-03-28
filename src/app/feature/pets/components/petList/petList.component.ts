@@ -29,8 +29,8 @@ export class PetListComponent implements OnInit, OnDestroy {
     private destroy$ = new Subject<void>();
 
     ngOnInit(): void {
-        this.loadPets();
-        this.updateList();
+        this.pets$ = this.petService.pets$;
+        this.petService.getAllPets().subscribe();
     }
 
     ngOnDestroy(): void {

@@ -1,50 +1,120 @@
-<div class="container">
-    <p-table [value]="agendamentos" [tableStyle]="{ 'min-width': '60rem' }">
-        <ng-template #caption>
-            <div class="flex items-center justify-between">
-                <span class="text-xl font-bold">Products</span>
-                <p-button icon="pi pi-refresh" rounded raised />
-            </div>
-        </ng-template>
-        <ng-template #header>
+<div class="container mx-auto px-4 py-8">
+    <p-toast/>
+    <!-- Header e Filtros -->
+    <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Agendamentos</h2>
+            <a [routerLink]="['/agendamentos', 'novo']">
+                <button pButton pRipple
+                        icon="pi pi-plus"
+                        label="Novo Agendamento"
+                        class="p-button-success"></button>
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <p-select [options]="statusOptions"
+                      placeholder="Filtrar por status"
+                      optionLabel="label"
+                      optionValue="value"
+                      class="w-full"></p-select>
+
+            <p-datepicker placeholder="Filtrar por data"
+                       selectionMode="range"
+                       [showButtonBar]="true"
+                       dateFormat="dd/mm/yy"
+                       class="w-full"></p-datepicker>
+
+            <p-select [options]="tiposServico"
+                      placeholder="Tipo de serviço"
+                      optionLabel="label"
+                      optionValue="value"
+                      class="w-full"></p-select>
+
+            <span class="p-input-icon-left w-full">
+                <i class="pi pi-search"></i>
+                <input pInputText placeholder="Pesquisar..." class="w-full">
+            </span>
+        </div>
+    </div>
+
+    <!-- Tabela de Agendamentos -->
+    <p-table [value]="(agendamentos$ | async) || []"
+            [paginator]="true"
+            [rows]="10"
+            styleClass="p-datatable-striped p-datatable-gridlines"
+            [globalFilterFields]="['pet.nome', 'servico', 'tutor']">
+
+        <ng-template pTemplate="header">
             <tr>
-                <th>Tipo</th>
+                <th pSortableColumn="data">Data <p-sortIcon field="data"></p-sortIcon></th>
                 <th>Pet</th>
-                <th>Data</th>
-                <th>Cuidados</th>
+                <th>Cuidado</th>
+                <th>Tutor</th>
                 <th>Status</th>
-                <th></th>
+                <th>Tipo</th>
+                <th>Ações</th>
             </tr>
         </ng-template>
-        <ng-template #body let-agendamento>
+
+        <ng-template pTemplate="body" let-agendamento>
             <tr>
-                <td>{{ agendamento.tipo }}</td>
-                <td>
-                    {{ agendamento.pet.petName }}
-                </td>
                 <td>{{ agendamento.data }}</td>
-                <td>{{ agendamento.cuidados }}</td>
                 <td>
-                    <p-tag
-                        [value]="agendamento.status"
-                        [severity]="getSeverity(agendamento.status)"
-                    />
+                    <div class="flex items-center gap-3">
+                        <!-- <img [src]="agendamento.pet.imagem"
+                             alt="Imagem do pet"
+                             class="w-10 h-10 rounded-full object-cover"> -->
+                        <span>{{ agendamento.pet.petName }}</span>
+                    </div>
+                </td>
+                <td>{{ agendamento.cuidados }}</td>
+                <td>{{ agendamento.pet.tutorName }}</td>
+                <td>
+                    <p-tag [value]="agendamento.status"
+                          [severity]="getSeverity(agendamento.status)"></p-tag>
                 </td>
                 <td>
-                    <a [routerLink]="`/agendamentos/${agendamento.id}/reagendar`"
-                        ><button
-                            class="p-3 bg-blue-500 hover:bg-blue-300 text-white rounded-full cursor-pointer"
-                            (click)="reagendar()"
-                        >
-                            reagendar
-                        </button></a
-                    >
+                    <span class="text-sm px-2 py-1 rounded"
+                          [ngClass]="{
+                            'bg-blue-100 text-blue-800': agendamento.tipo === 'AUTOMATICO',
+                            'bg-purple-100 text-purple-800': agendamento.tipo === 'MANUAL'
+                          }">
+                        {{ agendamento.tipo | titlecase }}
+                    </span>
+                </td>
+                <td>
+                    <div class="flex gap-2">
+                        <a [routerLink]="['/agendamentos', agendamento.id, 'reagendar']">
+                            <button pButton pRipple
+                                    icon="pi pi-calendar"
+                                    class="p-button-sm p-button-info p-button-text"
+                                    (click)="reagendar()"></button>
+                        </a>
+
+                        <button pButton pRipple
+                                icon="pi pi-times"
+                                class="p-button-sm p-button-danger p-button-text"
+                                (click)="cancelarAgendamento(agendamento.id)"></button>
+                    </div>
                 </td>
             </tr>
         </ng-template>
-        <ng-template #footer>
-            In total there are
-            {{ agendamentos ? agendamentos.length : 0 }} agendamentos.
+
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="7" class="text-center py-8">
+                    <div class="flex flex-col items-center gap-4">
+                        <i class="pi pi-calendar text-4xl text-gray-400"></i>
+                        <p class="text-gray-600">Nenhum agendamento encontrado</p>
+                        <button pButton pRipple
+                                icon="pi pi-plus"
+                                label="Criar Novo Agendamento"
+                                routerLink="/agendamentos/novo"
+                                class="p-button-outlined"></button>
+                    </div>
+                </td>
+            </tr>
         </ng-template>
     </p-table>
 </div>

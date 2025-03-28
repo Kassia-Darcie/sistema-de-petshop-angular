@@ -6,6 +6,7 @@ import { CadastroPetComponent } from './feature/cadastro-pets/view/cadastro-pet/
 import { PetDetailsComponent } from './feature/pets/components/petDetails/petDetails.component';
 import { PetListComponent } from './feature/pets/components/petList/petList.component';
 import { ReagendamentoComponent } from './feature/agendamentos/reagendamento/reagendamento.component';
+import { NovoAgendamentoComponent } from './feature/agendamentos/novo-agendamento/novo-agendamento.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,11 @@ export const routes: Routes = [
     path: 'agendamentos',
     component: AgendamentosComponent,
     title: 'Agendamentos'
+  },
+  {
+    path: 'agendamentos/novo',
+    component: NovoAgendamentoComponent,
+    title: 'Novo agendamento'
   },
   {
     path: 'agendamentos/:id/reagendar',

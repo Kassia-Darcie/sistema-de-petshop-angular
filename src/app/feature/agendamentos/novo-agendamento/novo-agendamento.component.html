@@ -1,0 +1,67 @@
+<!-- novo-agendamento.component.html -->
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6">
+        <!-- Header -->
+        <div class="flex items-center gap-4 mb-8">
+            <button pButton pRipple
+                    icon="pi pi-arrow-left"
+                    class="p-button-text p-button-rounded"
+                    routerLink="/agendamentos"></button>
+            <h1 class="text-2xl font-bold text-gray-800">Novo Agendamento</h1>
+        </div>
+
+        <!-- Formulário -->
+        <form [formGroup]="agendamentoForm" (ngSubmit)="onSubmit()" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Seleção do Pet -->
+            <div class="flex flex-col gap-2">
+                <label for="pet" class="font-medium text-gray-700">Selecione o Pet</label>
+                <p-dropdown [options]="pets"
+                          formControlName="pet"
+                          optionLabel="label"
+                          placeholder="Selecione um pet"
+                          [showClear]="true"
+                          class="w-full">k</p-dropdown>
+            </div>
+
+            <!-- Tipo de Serviço -->
+            <div class="flex flex-col gap-2">
+                <label for="servico" class="font-medium text-gray-700">Tipo de Serviço</label>
+                <p-dropdown [options]="tiposServico"
+                          formControlName="cuidado"
+                          placeholder="Selecione o serviço"
+                          class="w-full"></p-dropdown>
+            </div>
+
+            <!-- Data e Hora -->
+            <div class="flex flex-col gap-2">
+                <label for="data" class="font-medium text-gray-700">Data e Hora</label>
+                <p-calendar formControlName="dataHora"
+                          [showTime]="true"
+                          [minDate]="minDate"
+                          dateFormat="dd/mm/yy"
+                          [hourFormat]="'24'"
+                          class="w-full"></p-calendar>
+            </div>
+
+
+
+
+
+            <!-- Ações -->
+            <div class="md:col-span-2 flex justify-end gap-4 mt-6">
+                <button pButton pRipple
+                        type="button"
+                        label="Cancelar"
+                        class="p-button-text"
+                        routerLink="/agendamentos"></button>
+
+                <button pButton pRipple
+                        type="submit"
+                        label="Salvar Agendamento"
+                        class="p-button-success"
+                        [disabled]="agendamentoForm.invalid"
+                        ></button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, tap } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, Subject, tap, throwError } from 'rxjs';
 
 import { Pet } from '../../models/pet';
 
@@ -31,6 +31,10 @@ export class PetService {
         return this.http.get<Pet[]>(this.baseUrl + `/pets`).pipe(
             tap((pets) => {
                 this.petsSubject.next(pets);
+            }),
+            catchError((error) => {
+                console.error('Erro ao carregar pets:', error);
+                return throwError(() => error);
             })
         );
     }
@@ -56,7 +60,11 @@ export class PetService {
     }
 
     deletePet(id: string) {
-        return this.http.delete(this.baseUrl + `/pets/${id}`);
+        return this.http.delete(this.baseUrl + `/pets/${id}`).pipe(
+            tap(() => {
+                this.notificarAtualizacoes();
+            })
+        );
     }
 
     async getPetBreeds(specie: 'Cachorro' | 'Gato'): Promise<string[]> {
@@ -79,6 +87,13 @@ export class PetService {
     }
 
     private notificarAtualizacoes() {
-        this.getAllPets().subscribe();
+        this.getAllPets().subscribe({
+            next: (pets) => {
+                this.petsSubject.next(pets);
+            },
+            error: (error) => {
+                console.error('Erro ao carregar pets:', error);
+            },
+        });
     }
 }
