@@ -17,6 +17,7 @@ import { TextareaModule } from 'primeng/textarea';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { Agendamento } from '@app/models/agendamento.model';
+import { Router } from '@angular/router';
 
 interface PetOption {
     label: string;
@@ -57,7 +58,8 @@ export class NovoAgendamentoComponent implements OnInit {
     constructor(
         private agendamentoService: AgendamentoService,
         private petService: PetService,
-        private messageService: MessageService
+        private messageService: MessageService,
+        private router: Router,
     ) {
         this.minDate = new Date();
     }
@@ -107,5 +109,9 @@ export class NovoAgendamentoComponent implements OnInit {
                     });
                 },
             });
+    }
+
+    onClose( ){
+        this.router.navigate(['/agendamentos']);
     }
 }

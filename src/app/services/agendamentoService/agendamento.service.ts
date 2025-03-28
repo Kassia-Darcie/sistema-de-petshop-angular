@@ -50,7 +50,8 @@ export class AgendamentoService {
                 params:{
                     petId: petId,
 
-                }
+                },
+                responseType: 'text' as 'json',
             })
             .pipe(tap((res) => this.notificarAtualizacoes()));
     }
@@ -67,6 +68,7 @@ export class AgendamentoService {
                 params: {
                     novoHorario: data,
                 },
+                responseType: 'text' as 'json',
             })
             .pipe(tap(() => this.notificarAtualizacoes()));
     }
@@ -99,7 +101,7 @@ export class AgendamentoService {
         });
     }
 
-    private convertData(data: string): string {
+    convertData(data: string): string {
         return moment(data).format('DD/MM/YYYY HH:mm');
     }
 }

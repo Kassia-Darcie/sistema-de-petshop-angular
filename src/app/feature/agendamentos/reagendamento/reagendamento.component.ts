@@ -18,7 +18,7 @@ import { ToastModule } from 'primeng/toast';
 })
 export class ReagendamentoComponent implements OnInit {
     agendamento!: Agendamento;
-    //salvarAgendamento = output<string>();
+    
     @Input()
     set id(id: any) {
         this.agendamentoService
@@ -47,10 +47,10 @@ export class ReagendamentoComponent implements OnInit {
     }
 
     data: Date | undefined | string;
+    today: Date = new Date();
 
     salvar() {
-        //this.salvarAgendamento.emit(moment(this.data).format('DD/MM/YYYY HH:mm'));
-        //console.log(moment(this.data).format('DD/MM/YYYY HH:mm'));
+
         this.agendamentoService
             .reagendarAgendamento(
                 this.agendamento.id,
@@ -66,7 +66,7 @@ export class ReagendamentoComponent implements OnInit {
                       });
                 },
                 error: (error) => {
-                    console.error('Erro ao cancelar agendamento:', error);
+                    console.error('Erro ao reagendar:', error);
                     this.messageService.add({
                         key: 'confirm',
                         severity: 'error',

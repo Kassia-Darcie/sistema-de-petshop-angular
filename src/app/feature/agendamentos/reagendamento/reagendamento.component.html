@@ -1,22 +1,10 @@
 <div class="h-screen grid place-items-center">
-    <p-toast position="top-center" key="confirm" (onClose)="onClose()" [baseZIndex]="5000">
-        <ng-template let-message #headless let-closeFn="closeFn">
-            <section class="flex flex-col p-4 gap-4 w-full bg-primary/70 rounded-xl">
-                <div class="flex items-center gap-5">
-                    <i class="pi pi-cloud-upload text-white dark:text-black text-2xl"></i>
-                    <span class="font-bold text-base text-white dark:text-black">{{ message.summary }}</span>
-                </div>
 
-                <div class="flex gap-4 mb-4 justify-end">
-                    <p-button label="Ok" (click)="closeFn($event)" size="small" />
-                </div>
-            </section>
-        </ng-template>
-    </p-toast>
+    <p-toast life="3000" key="confirm" (onClose)="onClose()" position="top-center"/>
     <div class="card w-xl m-auto">
         <h1>Reagendar</h1>
         <div class="flex flex-col gap-4">
-            <p-datepicker [(ngModel)]="data" dateFormat="dd/mm/yy" [showTime]="true" [hourFormat]="'24'"/>
+            <p-datepicker [(ngModel)]="data" dateFormat="dd/mm/yy" [showTime]="true" [hourFormat]="'24'" [minDate]="today"/>
 
 
             <div class="flex justify-end gap-4">
