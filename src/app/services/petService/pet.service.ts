@@ -9,6 +9,11 @@ interface PetFilter {
     raca?: string;
     especie?: string;
 }
+
+interface PetPostResponse {
+    message?: string;
+    id?: string;
+}
 @Injectable({
     providedIn: 'root',
 })
@@ -45,8 +50,8 @@ export class PetService {
         return this.http.get<Pet>(this.baseUrl + `/pets/${id}`);
     }
 
-    savePet(pet: Partial<Pet>): Observable<string> {
-        return this.http.post<string>(this.baseUrl + `/pets`, pet).pipe(
+    savePet(pet: Partial<Pet>): Observable<PetPostResponse> {
+        return this.http.post<PetPostResponse>(this.baseUrl + `/pets`, pet).pipe(
             tap((res) => {
                 this.notificarAtualizacoes();
             })

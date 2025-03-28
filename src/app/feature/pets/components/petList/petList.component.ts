@@ -5,6 +5,9 @@ import { PetService } from '@services/petService/pet.service';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { DataViewModule } from 'primeng/dataview';
+import { IconField } from 'primeng/iconfield';
+import { InputIcon } from 'primeng/inputicon';
+import { InputTextModule } from 'primeng/inputtext';
 import { Observable, Subject } from 'rxjs';
 import {
     debounceTime,
@@ -23,6 +26,9 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
     selector: 'app-petList',
     imports: [
         DataViewModule,
+        IconField,
+        InputIcon,
+        InputTextModule,
         ButtonModule,
         RouterLink,
         AsyncPipe,
