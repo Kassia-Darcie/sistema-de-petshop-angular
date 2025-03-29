@@ -1,4 +1,4 @@
-import { Pet } from './../../../../models/pet';
+import { Pet } from '../../models/pet';
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import {
     ReactiveFormsModule,

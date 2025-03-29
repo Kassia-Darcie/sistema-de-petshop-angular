@@ -42,7 +42,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
     ],
     providers: [PetService, AsyncPipe],
     templateUrl: './petList.component.html',
-    styleUrls: ['../../../../../styles.css', './petList.component.css'],
+    styleUrls: ['./petList.component.css'],
 })
 export class PetListComponent implements OnInit, OnDestroy {
     pets$!: Observable<Pet[]>;
@@ -87,12 +87,6 @@ export class PetListComponent implements OnInit, OnDestroy {
         }
     }
 
-    /* buscarPet($event: Event) {
-        console.log('Valor do input de busca: ', this.inputDeBusca);
-        if (this.inputDeBusca.length > 2 || this.inputDeBusca.length === 0) {
-            this.petService.getAllPets({ nome: this.inputDeBusca }).subscribe();
-        }
-    } */
 
     private updateList() {
         this.petService.pets$.pipe(takeUntil(this.destroy$)).subscribe();

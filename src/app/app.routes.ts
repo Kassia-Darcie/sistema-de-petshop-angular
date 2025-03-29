@@ -1,10 +1,9 @@
 import { Routes } from '@angular/router';
-import { PetsComponent } from './feature/pets/view/pets.component';
 import { AgendamentosComponent } from './feature/agendamentos/view/agendamentos.component';
-import { NotificacoesComponent } from './feature/notificacoes/view/notificacoes.component';
-import { CadastroPetComponent } from './feature/cadastro-pets/view/cadastro-pet/cadastro-pet.component';
+import { NotificacoesComponent } from './feature/notificacoes/notificacoes.component';
+import { CadastroPetComponent } from './feature/cadastro-pets/cadastro-pet.component';
 import { PetDetailsComponent } from './feature/pets/components/petDetails/petDetails.component';
-import { PetListComponent } from './feature/pets/components/petList/petList.component';
+import { PetListComponent } from '@feature/pets/petList.component';
 import { ReagendamentoComponent } from './feature/agendamentos/reagendamento/reagendamento.component';
 import { NovoAgendamentoComponent } from './feature/agendamentos/novo-agendamento/novo-agendamento.component';
 
