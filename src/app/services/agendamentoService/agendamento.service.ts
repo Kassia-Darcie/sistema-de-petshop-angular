@@ -25,9 +25,9 @@ export class AgendamentoService {
         ]);
     }
 
-    getAllAgendamentos(): Observable<Agendamento[]> {
+    getAllAgendamentos(filtros: any): Observable<Agendamento[]> {
         return this.http
-            .get<Agendamento[]>(this.baseUrl).pipe(
+            .get<Agendamento[]>(this.baseUrl, {params: filtros}).pipe(
                 tap((agendamentos) => {
                   // Atualiza o BehaviorSubject com a nova lista
                   this.agendamentosSubject.next(agendamentos);
@@ -88,7 +88,7 @@ export class AgendamentoService {
     }
 
     private notificarAtualizacoes() {
-        this.getAllAgendamentos().subscribe({
+        this.getAllAgendamentos(null).subscribe({
             next: (agendamentos) => {
                 this.agendamentosSubject.next(agendamentos);
             },

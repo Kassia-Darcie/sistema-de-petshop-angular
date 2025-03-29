@@ -88,12 +88,5 @@ export class PetListComponent implements OnInit, OnDestroy {
     }
 
 
-    private updateList() {
-        this.petService.pets$.pipe(takeUntil(this.destroy$)).subscribe();
-    }
-
-    private loadPets() {
-        this.pets$ = this.petService.pets$;
-        this.petService.getAllPets().subscribe();
-    }
+   
 }

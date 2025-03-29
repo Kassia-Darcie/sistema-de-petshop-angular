@@ -1,9 +1,9 @@
-<div>
+<div class="container mx-auto">
     <p-confirmdialog/>
     <app-pet-edit-form [pet]="pet" (petUpdated)="handlePetUpdated($event)"/>
-    <div class="grid grid-cols-12 gap-y-8 gap-x-4">
+    <div class="@md:grid @md:grid-cols-12 gap-y-8 gap-x-4">
         <!-- Imagem -->
-        <div class="col-span-6 rounded-2xl overflow-hidden">
+        <div class="@md:col-span-6 rounded-2xl overflow-hidden">
             <img
                 class="w-full h-full object-cover"
                 src="{{ pet.imagem }}"
@@ -11,7 +11,7 @@
             />
         </div>
         <!-- Informações -->
-        <div class="col-span-6 flex flex-col py-8">
+        <div class="@md:col-span-6 flex flex-col py-8">
             <span class="text-sm text-surface-500 capitalize">{{
                 pet.especie.toLowerCase()
             }}</span>
@@ -46,7 +46,7 @@
         </div>
 
         <!-- Descrição -->
-        <div class="col-start-2 col-span-11">
+        <div class="mb-8 @md:col-start-2 @md:col-span-11">
             <h2 class="text-2xl mb-2">Descrição</h2>
             <p class="text-base">{{ pet.descricao }}</p>
         </div>

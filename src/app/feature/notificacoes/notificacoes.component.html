@@ -19,7 +19,7 @@
             <label for="tipoFilter">Tipo de Notificação</label>
             <p-select
                 [options]="tiposNotificacao"
-                [(ngModel)]="filtros.tipo"
+                [formControl]="filtros.tipo"
                 optionLabel="label"
                 optionValue="value"
                 [showClear]="true"
@@ -31,7 +31,7 @@
             <label for="statusFilter">Status</label>
             <p-select
                 [options]="statusOptions"
-                [(ngModel)]="filtros.status"
+                [formControl]="filtros.status"
                 optionLabel="label"
                 optionValue="value"
                 [showClear]="true"

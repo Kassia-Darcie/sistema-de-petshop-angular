@@ -21,7 +21,7 @@ import { IftaLabelModule } from 'primeng/iftalabel';
 import { TextareaModule } from 'primeng/textarea';
 import { DialogModule } from 'primeng/dialog';
 
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { FluidModule } from 'primeng/fluid';
 
@@ -40,7 +40,7 @@ const P_COMPONENTS = [
 
 @Component({
     selector: 'app-cadastro-pet',
-    imports: [...P_COMPONENTS, ReactiveFormsModule],
+    imports: [...P_COMPONENTS, ReactiveFormsModule, RouterLink],
     providers: [PetService, ConfirmationService],
     templateUrl: './cadastro-pet.component.html',
     styleUrl: './cadastro-pet.component.css',

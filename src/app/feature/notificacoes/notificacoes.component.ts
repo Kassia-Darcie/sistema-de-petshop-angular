@@ -55,7 +55,7 @@ export class NotificacoesComponent {
     tiposNotificacao = [
         { label: 'Vacina', value: 'VACINA' },
         { label: 'Consulta', value: 'CONSULTA' },
-        { label: 'Banho e tosa', value: 'BANHO_E_TOSA' },
+        { label: 'Banho e tosa', value: 'BANHO_TOSA' },
     ];
 
     constructor(private notificacaoService: NotificacaoService) {}
@@ -69,12 +69,12 @@ export class NotificacoesComponent {
                         debounceTime(300),
                         distinctUntilChanged(),
                         filter(
-                            (nomePet) => nomePet!.length > 2
+                            (nomePet) => nomePet!.length > 2 || nomePet!.length === 0
                         )
                     )
                     .subscribe((nomePet) => {
                         console.log('Valor do input de busca: ', nomePet);
-                        this.notificacaoService.listar({pet: this.filtros.pet.value}).subscribe();
+                        this.notificacaoService.listar({pet: this.filtros.pet.value || ''}).subscribe();
                     });
     }
 
@@ -86,14 +86,11 @@ export class NotificacoesComponent {
 
 
     aplicarFiltros(): void {
-        this.notificacaoService.listar(null).subscribe({
-            next: (notificacoes) => {
-                this.notificacoes$ = this.notificacaoService.notificacoes$;
-
-            },
-            error: () => {
-            },
-        });
+        this.notificacaoService.listar({
+            pet: this.filtros.pet.value || '',
+            tipo: this.filtros.tipo.value || '',
+            status: this.filtros.status.value || ''
+        }).subscribe((notificacoes) => console.log(notificacoes));
     }
 
     getSeveridadeStatus(

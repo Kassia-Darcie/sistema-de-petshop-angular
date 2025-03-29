@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { Agendamento } from '@app/models/agendamento.model';
 import { AgendamentoService } from '@app/services/agendamentoService/agendamento.service';
-import { filter, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, map, Observable, startWith, Subject, takeUntil } from 'rxjs';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { RatingModule } from 'primeng/rating';
@@ -17,7 +17,6 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { InputIcon } from 'primeng/inputicon';
 import { FluidModule } from 'primeng/fluid';
 import { InputTextModule } from 'primeng/inputtext';
-import { a } from 'node_modules/@angular/core/navigation_types.d-u4EOrrdZ';
 
 @Component({
     selector: 'app-agendamentos',
@@ -69,7 +68,7 @@ export class AgendamentosComponent implements OnInit, OnDestroy {
         },
         {
             label: 'Banho e Tosa',
-            value: 'BANHO_E_TOSA',
+            value: 'BANHO_TOSA',
         },
         {
             label: 'Consulta',
@@ -93,7 +92,23 @@ export class AgendamentosComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.agendamentos$ = this.agendamentoService.agendamentos$;
-        this.agendamentoService.getAllAgendamentos().subscribe();
+        this.agendamentoService.getAllAgendamentos(null).subscribe();
+
+        this.inputDeBusca.valueChanges
+                            .pipe(
+                                debounceTime(300),
+                                distinctUntilChanged(),
+                                filter(
+                                    (nomePet) => nomePet!.length > 2 || nomePet!.length === 0
+                                )
+                            )
+                            .subscribe((nomePet) => {
+                                console.log('Valor do input de busca: ', nomePet);
+                                this.agendamentos$ = this.agendamentoService.getAllAgendamentos({pet: nomePet || ''}).pipe(
+                                    map((agendamentos: Agendamento[]) => {
+                                        return agendamentos.filter(agendamento => agendamento.pet.petName.toLowerCase().includes(nomePet!.toLowerCase()));
+                                    }));
+                            });
     }
 
     ngOnDestroy(): void {
@@ -137,17 +152,15 @@ export class AgendamentosComponent implements OnInit, OnDestroy {
     onStatusChange($event: SelectChangeEvent) {
         const status: string = $event.value;
         console.log('Status selecionado:', status);
-        this.agendamentos$ = this.agendamentoService.getAllAgendamentos().pipe(
-            filter((agendamentos, i) => agendamentos[i].status === status)
-        );
+        this.agendamentoService.getAllAgendamentos({status}).subscribe();
     }
 
     onTipoChange($event: SelectChangeEvent) {
         const tipo: string = $event.value;
         console.log('Tipo selecionado:', tipo);
-        this.agendamentos$ = this.agendamentoService.getAllAgendamentos().pipe(
-            map((agendamentos) => agendamentos.filter((agendamento) => agendamento.cuidados.includes(tipo) ))
-        );
+        this.agendamentos$ = this.agendamentoService.getAllAgendamentos(null).pipe(map((agendamentos: Agendamento[]) => {
+            return agendamentos.filter(agendamento => agendamento.cuidados.includes(tipo));
+        }));
 
     }
 
