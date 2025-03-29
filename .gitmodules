@@ -1,0 +1,4 @@
+[submodule "backend-microservices"]
+	path = backend-microservices
+	url = git@git.gft.com:kalo/desafio-microservices.git
+	branch = feature/docker
