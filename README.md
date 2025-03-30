@@ -1,59 +1,56 @@
-# DesafioAngular
+# Desafio Angular - Sistema de Petshop
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
+Este projeto consiste no frontend de um sistema de gerenciamento para petshops
 
-## Development server
+## Módulos do Sistema
 
-To start a local development server, run:
+### 1. Módulo de Cadastro de Pets
+- Lista os pets cadastrados, como opções de filtro pelo nome e espécie do pet
+- Permite cadastrar, editar e deletar um pet
+- Mostra detalhes de um pet
 
-```bash
-ng serve
-```
+### 2. Módulo de Agendamento de Cuidados
+- Lista os agendamentos criados, com opções de filtro
+- Cria agendamentos manuais
+- Permite cancelar e remarcar agendamentos
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+### 3. Módulo de Notificação
+- Exibe as notificações de emails enviados, com opções de filtro
+- Permite marcar notificações como lidas, e reeviar notificações com falha
 
-## Code scaffolding
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Tecnologias Utilizadas
 
-```bash
-ng generate component component-name
-```
+- NodeJs v22.14.0
+- Angular v19
+- PrimeNg
+- Taiwind Css
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Pré-requisitos
 
-```bash
-ng generate --help
-```
+- NodeJs 22+
+- Docker e Docker Compose
+- Git
 
-## Building
+## Como Executar o Projeto
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+### 1. Clonando o repositório
 
 ```bash
-ng test
+git clone --recursive git@git.gft.com:kalo/desafio-angular.git
+cd desafio-angular
 ```
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
+### 2. Iniciando o backend
 
 ```bash
-ng e2e
+docker-compose -f ./backend-microservices/docker-compose.yml --build up -d
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### 3. Iniciando o frontend
 
-## Additional Resources
+```bash
+npm install
+npm run start
+```
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
